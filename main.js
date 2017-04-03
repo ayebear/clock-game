@@ -93,7 +93,20 @@ class Answers {
 
 // Keeps track of the score and updates the score on the page
 class Score {
+	constructor(element) {
+		this.scoreElement = document.getElementById(element)
+		this.score = 0
+		this.display()
+	}
 
+	add() {
+		this.score++
+		this.display()
+	}
+
+	display() {
+		this.scoreElement.innerHTML = this.score
+	}
 }
 
 // Main class to handle playing the game
@@ -102,7 +115,7 @@ class Game {
 		this.timer = new Timer(10, 'time')
 		this.clock = new Clock()
 		this.answers = new Answers()
-		this.score = new Score()
+		this.score = new Score('score')
 	}
 
 	start(name) {
