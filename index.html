@@ -2,57 +2,10 @@
 <html>
 <head>
 	<title>Clock Game</title>
-	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-
-<div id="game">
-	<div class="floating">
-		<!-- SVG clock -->
-		<svg id="clock" viewBox="0 0 100 100">
-
-			<!-- Clock outline -->
-			<circle id="outline" cx="50" cy="50" r="45" />
-
-			<!-- Marker formula: (pi / n) * radius * 2 -->
-
-			<!-- Second markers -->
-			<circle id="secondMarkers" cx="50" cy="50" r="40" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="0,4.188790205"  stroke-linecap="round"/>
-
-			<!-- Hour markers -->
-			<circle id="hourMarkers" cx="50" cy="50" r="40" fill="none" stroke="#000" stroke-width="4" stroke-dasharray="0,20.943951024"  stroke-linecap="round"/>
-
-			<!-- Hour labels -->
-			<g id="labels">
-				<text x="45" y="20">12</text>
-				<text x="82" y="53">3</text>
-				<text x="48" y="85">6</text>
-				<text x="15" y="53">9</text>
-			</g>
-
-			<!-- Clock hands -->
-			<g id="hands">
-				<rect id="hour" x="48.5" y="22" width="3" height="30" rx="2.5" ry="2.55" />
-				<rect id="minute" x="49" y="8" width="2" height="44" rx="2" ry="2" />
-				<line id="second" x1="50" y1="50" x2="50" y2="16" />
-			</g>
-		</svg>
-	</div>
-	<div class="floating">
-		<button class="button green" onclick="">A) 12:30:47</button>
-		<button class="button red">B) 12:30:48</button>
-		<button class="button blue">C) 12:30:49</button>
-		<button class="button yellow">D) 12:30:50</button>
-	</div>
-	<div class="floating">
-		<h1>Time left: <span id="time">?</span> s</h1>
-		<h1>Current score: <span id="score">?</span></h1>
-
-		<button class="button bordered">Quit</button>
-	</div>
-</div>
-
-<script type="text/javascript" src="main.js"></script>
-
+Enter your name:
+<input type="text" name="">
+<a href="game.html">Play Game</a>
 </body>
 </html>

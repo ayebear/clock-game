@@ -1,17 +1,21 @@
-function setHand(hand, degrees) {
-	document.getElementById(hand).setAttribute('transform', 'rotate(' + degrees + ' 50 50)')
+// Used to update the clock state and hands
+class Clock {
+	setHand(hand, degrees) {
+		document.getElementById(hand).setAttribute('transform', 'rotate(' + degrees + ' 50 50)')
+	}
+
+	setHands(hours, minutes, seconds) {
+		setHand('second', 6 * seconds)
+		setHand('minute', 6 * minutes)
+		setHand('hour', 30 * (hours % 12) + minutes / 2)
+	}
+
+	setHandsFromDate(date) {
+		setHands(date.getHours(), date.getMinutes(), date.getSeconds())
+	}
 }
 
-function setHands(hours, minutes, seconds) {
-	setHand('second', 6 * seconds)
-	setHand('minute', 6 * minutes)
-	setHand('hour', 30 * (hours % 12) + minutes / 2)
-}
-
-function setHandsFromDate(date) {
-	setHands(date.getHours(), date.getMinutes(), date.getSeconds())
-}
-
+// Used to update the timer display
 class Timer {
 	constructor(seconds = 15, element = 'time') {
 		this.seconds = seconds
@@ -25,30 +29,54 @@ class Timer {
 		let newTime = this.seconds - ((now - this.initialTime) / 1000)
 		if (newTime <= 0) {
 			// Quit game
-			this.timer.innerHTML = 0
+			newTime = 0
 		} else if (newTime <= 3) {
-			// Set to red and update
-			this.timer.innerHTML = newTime
+			// Set to red
 			this.timer.style.color = 'red'
 		} else {
-			// Update timer
-			this.timer.innerHTML = newTime
+			// Set to green
 			this.timer.style.color = 'green'
 		}
+		// Update timer
+		this.timer.innerHTML = newTime.toFixed(1)
 	}
 }
 
+// Used to update the buttons displaying the answers
+class Answers {
+
+}
+
+// Main class to handle playing the game
+class Game {
+	constructor() {
+		this.timer = new Timer(10, 'time')
+		this.clock = new Clock()
+		this.answers = new Answers()
+	}
+
+	start(name) {
+		this.name = name
+
+		setInterval(() => {
+			this.timer.update()
+		}, 100)
+	}
+
+	answer(id) {
+
+	}
+
+	end() {
+
+	}
+}
+
+var game = undefined
+
 function init() {
-
-// setInterval(function() {setHandsFromDate(new Date())}, 1000)
-
-// setHands(6, 10, 32)
-
-	let timer = new Timer(10, 'time')
-
-	setInterval(function() {
-		timer.update()
-	}, 200)
+	game = new Game()
+	game.start("Anonymous")
 }
 
 window.onload = init
