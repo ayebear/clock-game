@@ -33,10 +33,14 @@ class Clock {
 
 // Used to update the timer display
 class Timer {
-	constructor(seconds = 15, element = 'time') {
-		this.seconds = seconds
+	constructor(element = 'time') {
 		this.timer = document.getElementById(element)
 
+		this.reset()
+	}
+
+	reset(seconds = 15) {
+		this.seconds = seconds
 		this.initialTime = new Date().getTime()
 	}
 
@@ -71,7 +75,7 @@ class Answers {
 
 	// Generates a random time
 	generateAnswer() {
-		return [randomInt(1, 12), randomPadded(1, 60, 2), randomPadded(1, 60, 2)].join(':')
+		return [randomInt(1, 12), randomPadded(0, 59, 2), randomPadded(0, 59, 2)].join(':')
 	}
 
 	// Generates random answers, returns the correct one
@@ -109,12 +113,19 @@ class Score {
 	display() {
 		this.scoreElement.innerHTML = this.score
 	}
+
+	save(name) {
+		// Deserialize html5 local storage, save score, and serialize back
+		let scores = JSON.parse(localStorage.getItem("highScores")) || {}
+		scores[name] = this.score
+		localStorage.setItem("highScores", JSON.stringify(scores))
+	}
 }
 
 // Main class to handle playing the game
 class Game {
 	constructor() {
-		this.timer = new Timer(10, 'time')
+		this.timer = new Timer('time')
 		this.clock = new Clock()
 		this.answers = new Answers()
 		this.score = new Score('score')
@@ -131,6 +142,7 @@ class Game {
 	next() {
 		let correct = this.answers.generate()
 		this.clock.setHands(...correct.answer.split(':'))
+		this.timer.reset(10)
 	}
 
 	answer(id) {
@@ -145,7 +157,11 @@ class Game {
 	}
 
 	end() {
+		// Save score
+		this.score.save(this.name)
 
+		// Go back to home
+		window.location.replace("index.html")
 	}
 }
 
