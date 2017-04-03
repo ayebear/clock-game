@@ -1,9 +1,16 @@
 body {
 	background-color: black;
 }
+
+.floating {
+	display: inline-block;
+	vertical-align: middle;
+	width: 400px;
+	margin: 10px;
+	/*border: 3px solid #73AD21;*/
+}
+
 #game {
-	margin: auto;
-	width: 800px;
 	border: 3px solid gray;
 	padding: 16px;
 	background-color: black;
@@ -25,7 +32,8 @@ body {
 	stroke: #f55;
 }
 #clock {
-	width: 100%;
+	margin: auto;
+	width: auto;
 }
 #labels {
 	font-family: "sans-serif";
@@ -33,17 +41,17 @@ body {
 }
 
 .button {
+	width: 100%;
+
 	background-color: black;
 	border: none;
 	color: white;
 	padding: 15px 32px;
 	text-align: center;
 	text-decoration: none;
-	display: inline-block;
-	font-size: 3em;
+	font-size: 2em;
 	font-family: "monospace";
 	font-weight: bold;
-	width: 100%;
 }
 
 .green {
