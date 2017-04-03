@@ -5,18 +5,17 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-	<h2>Enter your name:</h2>
-	<input type="text" name=""><br>
-	<a class="button" href="game.html">Play Game</a><br>
+	<h1>Student area</h1>
+	<h3>Enter your full name:</h3>
+	<input type="text" id="name"><br>
+	<button class="button" onclick="play()">Play Game</button>
 
-	<h2>High scores:</h2>
-	<table id="scores">
-		<tr>
-			<th>Name</th>
-			<th>Score</th>
-		</tr>
-	</table>
+	<hr>
+	<h1>Teacher area</h1>
+	<h3>Enter password:</h3>
+	<input type="password" id="password"><br>
+	<button class="button" onclick="scores()">Show Scores</button>
 
-	<script type="text/javascript" src="scores.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 </body>
 </html>

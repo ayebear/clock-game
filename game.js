@@ -8,7 +8,7 @@ function randomInt(start, end) {
 // Returns a number with a fixed number of digits
 function randomPadded(start, end, padding = 0) {
 	// Create padded string
-	let randomStr = ("0".repeat(padding)) + randomInt(start, end)
+	let randomStr = ('0'.repeat(padding)) + randomInt(start, end)
 
 	// Truncate to only include correct number of characters
 	return randomStr.substr(-padding, padding)
@@ -44,6 +44,7 @@ class Timer {
 		this.initialTime = new Date().getTime()
 	}
 
+	// Updates timer and returns remaining time
 	update() {
 		let now = new Date().getTime()
 		let newTime = this.seconds - ((now - this.initialTime) / 1000)
@@ -59,6 +60,8 @@ class Timer {
 		}
 		// Update timer
 		this.timer.innerHTML = newTime.toFixed(1)
+
+		return newTime
 	}
 }
 
@@ -79,7 +82,7 @@ class Answers {
 	}
 
 	// Generates random answers, returns the correct one
-	// Returns: {id: 1, answer: "6:45:27"}
+	// Returns: {id: 1, answer: '6:45:27'}
 	generate() {
 		this.correctId = randomInt(0, numAnswers - 1)
 		this.answers = []
@@ -115,10 +118,16 @@ class Score {
 	}
 
 	save(name) {
-		// Deserialize html5 local storage, save score, and serialize back
-		let scores = JSON.parse(localStorage.getItem("highScores")) || {}
-		scores[name] = this.score
-		localStorage.setItem("highScores", JSON.stringify(scores))
+		// Deserialize html5 local storage
+		let scores = JSON.parse(localStorage.getItem('highScores')) || {}
+
+		// Save score if this was better than the last
+		if (!(name in scores) || this.score > scores[name]) {
+			scores[name] = this.score
+		}
+
+		// Save back to html5 local storage
+		localStorage.setItem('highScores', JSON.stringify(scores))
 	}
 }
 
@@ -133,12 +142,21 @@ class Game {
 
 	start(name) {
 		this.name = name
+		document.getElementById('playerName').innerHTML = name
+
+		// Update timer every 100ms
+		// When time runs out, end the game
 		setInterval(() => {
-			this.timer.update()
+			let remaining = this.timer.update()
+			if (remaining <= 0) {
+				this.end()
+			}
 		}, 100)
+
 		this.next()
 	}
 
+	// Generate a new clock
 	next() {
 		let correct = this.answers.generate()
 		this.clock.setHands(...correct.answer.split(':'))
@@ -161,15 +179,23 @@ class Game {
 		this.score.save(this.name)
 
 		// Go back to home
-		window.location.replace("index.html")
+		window.location.replace('finished.html?' + this.score.score)
 	}
 }
 
 var game = undefined
 
 function init() {
-	game = new Game()
-	game.start("Anonymous")
+	// Get player's name from URL parameters
+	let items = decodeURIComponent(location.search).substr(1).split('=')
+	if (items.length >= 2) {
+		let name = items[1]
+
+		// Start game
+		game = new Game()
+		game.start(name)
+	}
+
 }
 
 window.onload = init

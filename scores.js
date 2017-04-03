@@ -1,6 +1,6 @@
 function showScores() {
-	let table = document.getElementById("scores")
-	let scores = JSON.parse(localStorage.getItem("highScores")) || {}
+	let table = document.getElementById('scores')
+	let scores = JSON.parse(localStorage.getItem('highScores')) || {}
 
 	for (let name in scores) {
 		let score = scores[name]

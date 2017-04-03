@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clock Game</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<h1>Game Over</h1>
+	<h2>Your score was: <span id="score"></span></h2>
+
+	<form action="index.html">
+		<button type="submit" class="button">Go Back</button>
+	</form>
+
+	<script type="text/javascript">
+		document.getElementById('score').innerHTML = location.search.substr(1)
+	</script>
+</body>
+</html>
