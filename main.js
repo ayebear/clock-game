@@ -5,6 +5,15 @@ function randomInt(start, end) {
 	return Math.floor((Math.random() * (1 + end - start)) + start)
 }
 
+// Returns a number with a fixed number of digits
+function randomPadded(start, end, padding = 0) {
+	// Create padded string
+	let randomStr = ("0".repeat(padding)) + randomInt(start, end)
+
+	// Truncate to only include correct number of characters
+	return randomStr.substr(-padding, padding)
+}
+
 // Used to update the clock state and hands
 class Clock {
 	setHand(hand, degrees) {
@@ -62,25 +71,18 @@ class Answers {
 
 	// Generates a random time
 	generateAnswer() {
-		let result = {}
-		result.answer = [randomInt(1, 12), randomInt(1, 60), randomInt(1, 60)]
-		result.text = result.answer.join(':')
-		return result
+		return [randomInt(1, 12), randomPadded(1, 60, 2), randomPadded(1, 60, 2)].join(':')
 	}
 
 	// Generates random answers, returns the correct one
-	/*
-	Returns: {id: 1, answer: {
-		answer: [6, 45, 27],
-		text: "6:45:27"
-	}}*/
+	// Returns: {id: 1, answer: "6:45:27"}
 	generate() {
 		this.correctId = randomInt(0, numAnswers - 1)
 		this.answers = []
 		for (let i = 0; i < numAnswers; ++i) {
 			let answer = this.generateAnswer()
 			this.answers.push(answer)
-			this.buttons[i].innerHTML = answer.text
+			this.buttons[i].innerHTML = answer
 		}
 		return {id: this.correctId, answer: this.answers[this.correctId]}
 	}
@@ -128,7 +130,7 @@ class Game {
 
 	next() {
 		let correct = this.answers.generate()
-		this.clock.setHands(...correct.answer.answer)
+		this.clock.setHands(...correct.answer.split(':'))
 	}
 
 	answer(id) {
