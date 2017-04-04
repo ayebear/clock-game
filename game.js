@@ -129,6 +129,10 @@ class Score {
 		// Save back to html5 local storage
 		localStorage.setItem('highScores', JSON.stringify(scores))
 	}
+
+	current() {
+		return this.score
+	}
 }
 
 // Main class to handle playing the game
@@ -158,9 +162,15 @@ class Game {
 
 	// Generate a new clock
 	next() {
+		// Generate random answers
 		let correct = this.answers.generate()
+
+		// Set clock to correct answer
 		this.clock.setHands(...correct.answer.split(':'))
-		this.timer.reset(10)
+
+		// Decrease and reset timer
+		let newTime = Math.max(4, 15 - (this.score.current() * 1.5))
+		this.timer.reset(newTime)
 	}
 
 	answer(id) {
@@ -179,7 +189,7 @@ class Game {
 		this.score.save(this.name)
 
 		// Go back to home
-		window.location.replace('finished.html?' + this.name + "," + this.score.score)
+		window.location.replace('finished.html?' + this.name + "," + this.score.current())
 	}
 }
 
