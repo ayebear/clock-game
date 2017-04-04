@@ -17,10 +17,10 @@
 			<!-- Marker formula: (pi / n) * radius * 2 -->
 
 			<!-- Second markers -->
-			<circle id="secondMarkers" cx="50" cy="50" r="40" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="0,4.188790205"  stroke-linecap="round"/>
+			<circle id="secondMarkers" cx="50" cy="50" r="40" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="0,4.188790205" stroke-linecap="round"/>
 
 			<!-- Hour markers -->
-			<circle id="hourMarkers" cx="50" cy="50" r="40" fill="none" stroke="#000" stroke-width="4" stroke-dasharray="0,20.943951024"  stroke-linecap="round"/>
+			<circle id="hourMarkers" cx="50" cy="50" r="40" fill="none" stroke="#000" stroke-width="4" stroke-dasharray="0,20.943951024" stroke-linecap="round"/>
 
 			<!-- Hour labels -->
 			<g id="labels">
@@ -31,6 +31,7 @@
 			</g>
 
 			<!-- Clock hands -->
+			<!-- Source: http://thenewcode.com/943/An-SVG-Analog-Clock-In-6-Lines-of-JavaScript -->
 			<g id="hands">
 				<rect id="hour" x="48.5" y="22" width="3" height="30" rx="2.5" ry="2.55" />
 				<rect id="minute" x="49" y="8" width="2" height="44" rx="2" ry="2" />
@@ -38,12 +39,16 @@
 			</g>
 		</svg>
 	</div>
+
+	<!-- Answer buttons -->
 	<div class="floating">
 		<button id="button0" class="button green" onclick="game.answer(0)">?</button>
 		<button id="button1" class="button red" onclick="game.answer(1)">?</button>
 		<button id="button2" class="button blue" onclick="game.answer(2)">?</button>
 		<button id="button3" class="button yellow" onclick="game.answer(3)">?</button>
 	</div>
+
+	<!-- Time, score, and name -->
 	<div class="floating">
 		<h1>Time left: <span id="time">?</span> s</h1>
 		<h1>Current score: <span id="score">?</span></h1>

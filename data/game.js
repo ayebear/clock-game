@@ -16,13 +16,19 @@ function randomPadded(start, end, padding = 0) {
 
 // Used to update the clock state and hands
 class Clock {
+	// Rotate SVG hand a certain number of degrees
 	setHand(hand, degrees) {
 		document.getElementById(hand).setAttribute('transform', 'rotate(' + degrees + ' 50 50)')
 	}
 
+	// Rotate hands based on time
 	setHands(hours, minutes, seconds) {
+		// Source: http://thenewcode.com/943/An-SVG-Analog-Clock-In-6-Lines-of-JavaScript
+		// 360 / 60 = 6
 		this.setHand('second', 6 * seconds)
+		// 360 / 60 = 6
 		this.setHand('minute', 6 * minutes)
+		// 360 / 12 = 30, 60 / 30 = 2
 		this.setHand('hour', 30 * (hours % 12) + minutes / 2)
 	}
 

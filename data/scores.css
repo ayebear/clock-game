@@ -16,5 +16,6 @@ th, td, tr {
 	color: white;
 }
 
+/* Source: https://www.w3schools.com/css/css_table.asp */
 tr:nth-child(even){background-color: #333}
 tr:nth-child(odd){background-color: #555}
