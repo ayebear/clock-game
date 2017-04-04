@@ -6,14 +6,15 @@
 </head>
 <body>
 	<h1>Game Over</h1>
+	<h2>Good try, <span id="name"></span>!</h2>
 	<h2>Your score was: <span id="score"></span></h2>
 
+	<button class="button" onclick="tryAgain()">Try Again</button>
+
 	<form action="index.html">
-		<button type="submit" class="button">Go Back</button>
+		<button type="submit" class="button">Go Home</button>
 	</form>
 
-	<script type="text/javascript">
-		document.getElementById('score').innerHTML = location.search.substr(1)
-	</script>
+	<script type="text/javascript" src="finished.js"></script>
 </body>
 </html>

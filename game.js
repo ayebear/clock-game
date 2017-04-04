@@ -179,7 +179,7 @@ class Game {
 		this.score.save(this.name)
 
 		// Go back to home
-		window.location.replace('finished.html?' + this.score.score)
+		window.location.replace('finished.html?' + this.name + "," + this.score.score)
 	}
 }
 
