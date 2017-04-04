@@ -175,7 +175,7 @@ class Game {
 		this.clock.setHands(...correct.answer.split(':'))
 
 		// Decrease and reset timer
-		let newTime = Math.max(4, 15 - (this.score.current() * 1.5))
+		let newTime = Math.max(5, 20 - this.score.current())
 		this.timer.reset(newTime)
 	}
 
